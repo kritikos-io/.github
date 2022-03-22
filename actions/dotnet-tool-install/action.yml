@@ -1,0 +1,20 @@
+# kritikos-io/.github/actions/dotnet-tool-install
+
+name: Install .NET tool ${{ inputs.tool }}
+description: Installs requested .NET tool
+inputs:
+  tool:
+    description: The tool to install
+    required: true
+  version:
+    description: The version to use
+    required: false
+  global:
+    description: Install tool as global
+    required: false
+    default: ""
+runs:
+  using: "composite"
+  steps:
+    - run: VERSION=${{ inputs.version }} GLOBAL=${{ inputs.global }} dotnet tool install ${{ inputs.tool }} ${VERSION:+--version $VERSION} ${GLOBAL:+--global}
+      shell: bash

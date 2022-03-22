@@ -1,0 +1,34 @@
+name: Versioning job
+
+on:
+  workflow_call:
+    inputs:
+      createAssemblyInfo:
+        type: boolean
+        required: false
+        default: false
+    outputs:
+      version:
+        description: "Semantic Version string"
+        value: ${{ jobs.versioning.outputs.version }}
+    secrets:
+
+jobs:
+  versioning:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.version }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0.x"
+          include-prerelease: false
+      - uses: actions/dotnet-tool-install@v1
+        with:
+          tool: "gitversion.tool"
+          global: true
+      - id: version
+        run: echo "::set-output name=version::$(dotnet gitversion /output buildserver /showvariable SemVer)"
