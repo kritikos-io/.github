@@ -24,7 +24,7 @@ jobs:
         with:
           dotnet-version: "6.0.x"
           include-prerelease: false
-      - uses: .github/actions/dotnet-tool-install@v1
+      - uses: kritikos-io/.github/actions/dotnet-tool-install@v1
         with:
           tool: "gitversion.tool"
           global: true
