@@ -20,11 +20,11 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: kritikos-io/.github/.github/actions/setup-dotnet@v1
+      - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: "6.0.x"
           include-prerelease: false
-      - uses: actions/dotnet-tool-install@v1
+      - uses: .github/actions/dotnet-tool-install@v1
         with:
           tool: "gitversion.tool"
           global: true
