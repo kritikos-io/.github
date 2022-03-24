@@ -24,9 +24,9 @@ jobs:
         with:
           dotnet-version: "6.0.x"
           include-prerelease: false
-      # - uses: kritikos-io/.github/.github/actions/dotnet-tool-install@v1
-      #   with:
-      #     tool: "gitversion.tool"
-      #     global: true
-      # - id: version
-      #   run: echo "::set-output name=version::$(dotnet gitversion /output buildserver /showvariable SemVer)"
+      - uses: ../actions/dotnet-tool-install@v1
+        with:
+          tool: "gitversion.tool"
+          global: true
+      - id: version
+        run: echo "::set-output name=version::$(dotnet gitversion /output buildserver /showvariable SemVer)"
